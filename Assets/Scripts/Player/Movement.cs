@@ -4,50 +4,49 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-  Rigidbody2D body;
-  Animator animator;
-  new SpriteRenderer renderer;
+  private Rigidbody2D _body;
+  private Animator _animator;
+  private new SpriteRenderer _renderer;
 
-  float horizontal;
-  float vertical;
-  float moveLimiter = 0.7f;
+  private float _horizontal;
+  private float _vertical;
+  private const float MoveLimiter = 0.7f;
 
-  public float runSpeed = 1.0f;
   private static readonly int Speed = Animator.StringToHash("Speed");
 
   private void Start () {
-    body = GetComponent<Rigidbody2D>();
-    animator = GetComponent<Animator>();
-    renderer = GetComponent<SpriteRenderer>();
+    _body = GetComponent<Rigidbody2D>();
+    _animator = GetComponent<Animator>();
+    _renderer = GetComponent<SpriteRenderer>();
   }
 
   private void Update() {
-    horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
-    vertical = Input.GetAxisRaw("Vertical"); // -1 is down
-    this.AnimationUpdate();
+    _horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+    _vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+    AnimationUpdate();
   }
 
   private void FixedUpdate() {
-    if (horizontal != 0 && vertical != 0) {
-      horizontal *= moveLimiter;
-      vertical *= moveLimiter;
+    if (_horizontal != 0 && _vertical != 0) {
+      _horizontal *= MoveLimiter;
+      _vertical *= MoveLimiter;
     }
-    this.AnimationFixedUpdate();
-    body.velocity = new Vector2(horizontal , vertical);
+    AnimationFixedUpdate();
+    _body.velocity = new Vector2(_horizontal , _vertical);
   }
 
   private void AnimationUpdate() {
-    if (horizontal < 0){
-      renderer.flipX = true;
+    if (_horizontal < 0){
+      _renderer.flipX = true;
     }
-    if (horizontal > 0){
-      renderer.flipX = false;
+    if (_horizontal > 0){
+      _renderer.flipX = false;
     }
     
-    animator.SetFloat(Speed, Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+    _animator.SetFloat(Speed, Mathf.Abs(_horizontal) + Mathf.Abs(_vertical));
   }
 
   private void AnimationFixedUpdate() {
-    animator.SetFloat(Speed, Mathf.Abs(horizontal*vertical));
+    _animator.SetFloat(Speed, Mathf.Abs(_horizontal*_vertical));
   }
 }

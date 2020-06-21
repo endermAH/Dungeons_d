@@ -5,23 +5,30 @@ using System;
 
 public class Health : MonoBehaviour
 {
-    public int maxHP = 100;
-    int currentHP;
+    public GameObject healthBar;
+    private RectTransform _healthBarRectTransform;
+    public int maxHealth = 100;
+    private int currentHealth;
 
-    public bool isAlive => currentHP > 0;
+    public bool IsAlive => currentHealth > 0;
 
     public void Heal(int count)
     {
-        currentHP = Mathf.Clamp(currentHP + count, 0, maxHP);
+        currentHealth = Mathf.Clamp(currentHealth + count, 0, maxHealth);
     }
 
     public void Damage(int count)
     {
-        currentHP = Mathf.Clamp(currentHP - count, 0, maxHP);
-        if (currentHP == 0)
+        currentHealth = Mathf.Clamp(currentHealth - count, 0, maxHealth);
+        if (currentHealth == 0)
         {
             this.Death();
         }
+    }
+
+    private void SetHealthBarSize(int targetHealth)
+    {
+        _healthBarRectTransform.sizeDelta = new Vector2(targetHealth , 24);
     }
 
     public void Death()
@@ -32,12 +39,13 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHealth;
+        _healthBarRectTransform = healthBar.GetComponent<RectTransform>();
         print("Health module initialized");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        SetHealthBarSize(currentHealth);
     }
 }

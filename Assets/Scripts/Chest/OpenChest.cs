@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = System.Random;
 
 public class OpenChest : MonoBehaviour
@@ -12,7 +8,7 @@ public class OpenChest : MonoBehaviour
     private Animator _chestAnimator;
     private static readonly int Open = Animator.StringToHash("Open");
     private string[] _things;
-    private readonly string[] _thingsList = new string[] {"Coins", "Weapon", "Poition"};
+    private readonly string[] _thingsList = {"Coins", "Weapon", "Poition"};
 
     private void Start()
     {
@@ -33,7 +29,6 @@ public class OpenChest : MonoBehaviour
                 playerPosition.y,
                 chestPosition.x,
                 chestPosition.y);
-            print("Distance to chest: " + distanceToChest);
             if (distanceToChest < 0.24)
             {
                 _chestAnimator.SetBool(Open, true);
