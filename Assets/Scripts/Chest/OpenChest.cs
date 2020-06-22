@@ -4,9 +4,13 @@ using Random = System.Random;
 public class OpenChest : MonoBehaviour
 {
     public GameObject player;
+    public GameObject highlighter;
+    private GameObject _thisHighlighter;
     private Transform _chestTransform;
     private Animator _chestAnimator;
+    private double _distanceToChest;
     private static readonly int Open = Animator.StringToHash("Open");
+    private const float OpenDistance = 0.24f;
     private string[] _things;
     private readonly string[] _thingsList = {"Coins", "Weapon", "Poition"};
 
@@ -14,27 +18,15 @@ public class OpenChest : MonoBehaviour
     {
         _chestTransform = GetComponent<Transform>();
         _chestAnimator = GetComponent<Animator>();
-        _things = GenerateChestContains(5);
+        _things = GenerateChestContains(3);
         print("OpenChest module initialized\nPlayer: " + player.transform.name);
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
-        {
-            var playerPosition = player.transform.position;
-            var chestPosition = _chestTransform.position;
-            var distanceToChest = GetDistance(
-                playerPosition.x,
-                playerPosition.y,
-                chestPosition.x,
-                chestPosition.y);
-            if (distanceToChest < 0.24)
-            {
-                _chestAnimator.SetBool(Open, true);
-                print($"Opened! There is: {string.Join(", ", _things)}");
-            }
-        }
+        CheckOpen();
+        HighlightChest();
+        _distanceToChest = GetDistanceToChest();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -50,6 +42,18 @@ public class OpenChest : MonoBehaviour
         return dist;
     }
 
+    private double GetDistanceToChest()
+    {
+        var playerPosition = player.transform.position;
+        var chestPosition = _chestTransform.position;
+        var distanceToChest = GetDistance(
+            playerPosition.x,
+            playerPosition.y,
+            chestPosition.x,
+            chestPosition.y);
+        return distanceToChest;
+    }
+
     private string[] GenerateChestContains(int maxThings)
     {
         var rng = new Random();
@@ -60,5 +64,40 @@ public class OpenChest : MonoBehaviour
             contains[i] = item;
         }
         return contains;
+    }
+
+    private void CheckOpen()
+    {
+        if (!Input.GetKeyUp(KeyCode.Return)) return;
+        if (!(_distanceToChest < OpenDistance)) return;
+        
+        _chestAnimator.SetBool(Open, true);
+        print($"Opened! There is: {string.Join(", ", _things)}");
+    }
+
+    private void HighlightChest()
+    {
+        var isOpen = _chestAnimator.GetBool(Open);
+        if (isOpen)
+        {
+            if (_thisHighlighter)
+                Destroy(_thisHighlighter);
+            return;
+        }
+        
+        if (_distanceToChest < OpenDistance)
+        {
+            var position = _chestTransform.position;
+            var chestX = position.x;
+            var chestY = position.y;
+            if (!_thisHighlighter)
+                _thisHighlighter = Instantiate(highlighter, new Vector3(chestX,chestY, 0), Quaternion.identity);
+        }
+        else
+        {
+            if (_thisHighlighter)
+                Destroy(_thisHighlighter);
+        }
+
     }
 }
