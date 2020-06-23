@@ -7,19 +7,19 @@ public class Health : MonoBehaviour
 {
     public GameObject healthBar;
     private RectTransform _healthBarRectTransform;
-    public int maxHealth = 100;
+    private int _maxHealth;
     private int currentHealth;
 
     public bool IsAlive => currentHealth > 0;
 
     public void Heal(int count)
     {
-        currentHealth = Mathf.Clamp(currentHealth + count, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth + count, 0, _maxHealth);
     }
 
     public void Damage(int count)
     {
-        currentHealth = Mathf.Clamp(currentHealth - count, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth - count, 0, _maxHealth);
         if (currentHealth == 0)
         {
             this.Death();
@@ -37,9 +37,10 @@ public class Health : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        currentHealth = maxHealth;
+        _maxHealth = GetComponent<PlayerStats>().maxHealth;
+        currentHealth = _maxHealth;
         _healthBarRectTransform = healthBar.GetComponent<RectTransform>();
         print("Health module initialized");
     }
