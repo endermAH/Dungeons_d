@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+  public new Camera camera;
   private Rigidbody2D _body;
   private Animator _animator;
-  private new SpriteRenderer _renderer;
+  private SpriteRenderer _renderer;
+  private Transform _transform;
 
   private float _horizontal;
   private float _vertical;
@@ -18,6 +20,7 @@ public class Movement : MonoBehaviour
     _body = GetComponent<Rigidbody2D>();
     _animator = GetComponent<Animator>();
     _renderer = GetComponent<SpriteRenderer>();
+    _transform = GetComponent<Transform>();
   }
 
   private void Update() {
@@ -35,11 +38,17 @@ public class Movement : MonoBehaviour
     _body.velocity = new Vector2(_horizontal , _vertical);
   }
 
-  private void AnimationUpdate() {
-    if (_horizontal < 0){
+  private void AnimationUpdate()
+  {
+    var mouseX = Input.mousePosition.x;
+    var selfX = _transform.position.x * 100;
+    var cameraX = camera.transform.position.x * 100;
+    float cameraWidth = camera.pixelWidth;
+    var absoluteMouseX = cameraX - (cameraWidth / 2) + mouseX;
+    if (absoluteMouseX < selfX){
       _renderer.flipX = true;
     }
-    if (_horizontal > 0){
+    if (absoluteMouseX > selfX){
       _renderer.flipX = false;
     }
     
