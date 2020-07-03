@@ -9,10 +9,4 @@ public class CursorController : MonoBehaviour
     {
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using lang = Languages.Languages;
 
 namespace WeaponControl
 {
@@ -24,6 +25,7 @@ namespace WeaponControl
             _weapon = Weapon.RegularSword;
             _transform = GetComponent<Transform>();
             _handPosition = _weapon.HandPosition;
+            print($"{lang.RegularSword.Name}: {lang.RegularSword.Description}");
         }
 
         private void Update()
@@ -63,7 +65,7 @@ namespace WeaponControl
             yield return new WaitForSeconds(0.7f);
             _onAttack = false;
             _transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            yield return new WaitForSeconds(_weapon.AttackCooldown);
+            yield return new WaitForSeconds(_weapon.Stats.AttackCooldown);
 
             print("Cooldown finished");
             _onCooldown = false;
