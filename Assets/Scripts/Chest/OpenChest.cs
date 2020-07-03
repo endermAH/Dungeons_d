@@ -10,7 +10,8 @@ public class OpenChest : MonoBehaviour
     private Animator _chestAnimator;
     private double _distanceToChest;
     private static readonly int Open = Animator.StringToHash("Open");
-    private const float OpenDistance = 0.24f;
+    [SerializeField]
+    private float openDistance = 0.24f;
     private string[] _things;
     private readonly string[] _thingsList = {"Coins", "Weapon", "Poition"};
 
@@ -69,7 +70,7 @@ public class OpenChest : MonoBehaviour
     private void CheckOpen()
     {
         if (!Input.GetKeyUp(KeyCode.Return)) return;
-        if (!(_distanceToChest < OpenDistance)) return;
+        if (!(_distanceToChest < openDistance)) return;
         
         _chestAnimator.SetBool(Open, true);
         print($"Opened! There is: {string.Join(", ", _things)}");
@@ -85,7 +86,7 @@ public class OpenChest : MonoBehaviour
             return;
         }
         
-        if (_distanceToChest < OpenDistance)
+        if (_distanceToChest < openDistance)
         {
             var position = _chestTransform.position;
             var chestX = position.x;

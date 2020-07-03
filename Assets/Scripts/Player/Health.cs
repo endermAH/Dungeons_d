@@ -1,52 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+namespace Player
 {
-    public GameObject healthBar;
-    private RectTransform _healthBarRectTransform;
-    private int _maxHealth;
-    private int currentHealth;
-
-    public bool IsAlive => currentHealth > 0;
-
-    public void Heal(int count)
+    public class Health : MonoBehaviour
     {
-        currentHealth = Mathf.Clamp(currentHealth + count, 0, _maxHealth);
-    }
+        [SerializeField] private Slider healthBar;
+    
+        private int _maxHealth;
+        private float _currentHealth;
 
-    public void Damage(int count)
-    {
-        currentHealth = Mathf.Clamp(currentHealth - count, 0, _maxHealth);
-        if (currentHealth == 0)
+        public bool IsAlive => _currentHealth > 0;
+
+        public void Heal(int count)
         {
-            this.Death();
+            _currentHealth = Mathf.Clamp(_currentHealth + count, 0, _maxHealth);
         }
-    }
 
-    private void SetHealthBarSize(int targetHealth)
-    {
-        _healthBarRectTransform.sizeDelta = new Vector2(targetHealth , 24);
-    }
+        public void Damage(int count)
+        {
+            _currentHealth = Mathf.Clamp(_currentHealth - count, 0, _maxHealth);
+            if (_currentHealth <= 0)
+            {
+                this.Death();
+            }
+        }
 
-    public void Death()
-    {
-        print("Death");
-    }
+        public void Death()
+        {
+            print("Death");
+        }
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        _maxHealth = GetComponent<PlayerStats>().maxHealth;
-        currentHealth = _maxHealth;
-        _healthBarRectTransform = healthBar.GetComponent<RectTransform>();
-        print("Health module initialized");
-    }
+        private void Start()
+        {
+            _maxHealth = GetComponent<PlayerStats>().maxHealth;
+            _currentHealth = _maxHealth;
+            UpdateHealthBar();
+            print("Health module initialized");
+        }
 
-    private void Update()
-    {
-        SetHealthBarSize(currentHealth);
+        private void UpdateHealthBar()
+        {
+            healthBar.value = _currentHealth / _maxHealth;
+        }
     }
 }
