@@ -59,17 +59,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Chest\OpenChest.cs" />
+     <Compile Include="Assets\Scripts\Common\CursorController.cs" />
      <Compile Include="Assets\Scripts\Common\FlipController.cs" />
-     <Compile Include="Assets\Scripts\CursorController.cs" />
+     <Compile Include="Assets\Scripts\Common\PlayerArrowController.cs" />
+     <Compile Include="Assets\Scripts\Common\ZSortController.cs" />
      <Compile Include="Assets\Scripts\Languages\Languages.cs" />
      <Compile Include="Assets\Scripts\Languages\TranslatableString.cs" />
      <Compile Include="Assets\Scripts\Player\Health.cs" />
      <Compile Include="Assets\Scripts\Player\Movement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
-     <Compile Include="Assets\Scripts\PlayerArrowController.cs" />
      <Compile Include="Assets\Scripts\WeaponControl\Weapon.cs" />
      <Compile Include="Assets\Scripts\WeaponControl\WeaponAnimationController.cs" />
-     <Compile Include="Assets\Scripts\ZSortController.cs" />
+     <Compile Include="Assets\Scripts\WeaponControl\WeaponAttackController.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/evg.kur/Dungeons_d/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

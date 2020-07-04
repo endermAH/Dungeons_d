@@ -13,7 +13,6 @@ namespace WeaponControl
         private Weapon _weapon;
         private Animator _animator;
     
-        private bool _onCooldown = false;
         private Vector3 _handPosition;
 
         private void Start()
@@ -28,10 +27,6 @@ namespace WeaponControl
         private void Update()
         {
             KeepPosition();
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (!_onCooldown) StartCoroutine(AnimateWeapon());
-            }
         }
 
         private void KeepPosition()
@@ -47,16 +42,9 @@ namespace WeaponControl
             _transform.position = newPosition;
         }
 
-        private IEnumerator AnimateWeapon()
+        public void OnAttack()
         {
             _animator.Play("Attack");
-            _onCooldown = true;
-            
-            yield return new WaitForSeconds(0.5f); //Wait few seconds to animation completes
-            yield return new WaitForSeconds(_weapon.Stats.AttackCooldown);
-
-            _onCooldown = false;
-        
-        } 
+        }
     }
 }
