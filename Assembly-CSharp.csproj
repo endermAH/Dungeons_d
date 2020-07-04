@@ -63,6 +63,8 @@
      <Compile Include="Assets\Scripts\Common\FlipController.cs" />
      <Compile Include="Assets\Scripts\Common\PlayerArrowController.cs" />
      <Compile Include="Assets\Scripts\Common\ZSortController.cs" />
+     <Compile Include="Assets\Scripts\Enemy\BigRedMonster.cs" />
+     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Languages\Languages.cs" />
      <Compile Include="Assets\Scripts\Languages\TranslatableString.cs" />
      <Compile Include="Assets\Scripts\Player\Health.cs" />

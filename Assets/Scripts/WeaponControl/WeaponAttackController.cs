@@ -26,14 +26,9 @@ namespace WeaponControl
     
         private IEnumerator Attack()
         {
-            
             onCooldown = true;
-            
-            yield return new WaitForSeconds(0.2f); //Wait few seconds to animation completes
             yield return new WaitForSeconds(currentWeapon.Stats.AttackCooldown);
-
             onCooldown = false;
-        
         }
     
     }
