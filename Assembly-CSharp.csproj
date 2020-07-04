@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Chest\OpenChest.cs" />
+     <Compile Include="Assets\Scripts\Common\FlipController.cs" />
      <Compile Include="Assets\Scripts\CursorController.cs" />
      <Compile Include="Assets\Scripts\Languages\Languages.cs" />
      <Compile Include="Assets\Scripts\Languages\TranslatableString.cs" />

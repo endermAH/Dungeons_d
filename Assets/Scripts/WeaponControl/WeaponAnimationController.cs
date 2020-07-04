@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using lang = Languages.Languages;
+using Lang = Languages.Languages;
 
 namespace WeaponControl
 {
@@ -11,21 +11,18 @@ namespace WeaponControl
     
         private Transform _transform;
         private Weapon _weapon;
+        private Animator _animator;
     
         private bool _onCooldown = false;
-        private bool _onAttack = false;
         private Vector3 _handPosition;
-        private float _angleToMouse;
 
-        private Quaternion _targetRotation;
-        private Quaternion _fromRotation;
-        private Quaternion _toRotation;
         private void Start()
         {
             _weapon = Weapon.RegularSword;
             _transform = GetComponent<Transform>();
+            _animator = GetComponent<Animator>();
             _handPosition = _weapon.HandPosition;
-            print($"{lang.RegularSword.Name}: {lang.RegularSword.Description}");
+            print($"{Lang.RegularSword.Name}: {Lang.RegularSword.Description}");
         }
 
         private void Update()
@@ -34,13 +31,7 @@ namespace WeaponControl
             if (Input.GetMouseButtonUp(0))
             {
                 if (!_onCooldown) StartCoroutine(AnimateWeapon());
-                _targetRotation = Quaternion.Euler(0f, 0f, _angleToMouse);
-                _fromRotation = Quaternion.Euler(0, 0, _targetRotation.z - 90);
-                _toRotation = Quaternion.Euler(0, 0, _targetRotation.z + 90);
-                print($"from: {_fromRotation.z}, to: {_toRotation.z}");
             }
-        
-            KeepRotation();
         }
 
         private void KeepPosition()
@@ -58,41 +49,14 @@ namespace WeaponControl
 
         private IEnumerator AnimateWeapon()
         {
-            print("Attack!");
+            _animator.Play("Attack");
             _onCooldown = true;
-            _onAttack = true;
-        
-            yield return new WaitForSeconds(0.7f);
-            _onAttack = false;
-            _transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            
+            yield return new WaitForSeconds(0.5f); //Wait few seconds to animation completes
             yield return new WaitForSeconds(_weapon.Stats.AttackCooldown);
 
-            print("Cooldown finished");
             _onCooldown = false;
         
-        }
-
-        private void KeepRotation()
-        {
-            var diff = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            diff.Normalize();
-            var rotZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            _angleToMouse = rotZ - 90;
-
-            if (_onAttack) AttackRotation(_fromRotation, _toRotation);
-            else RotateSwordToMouse();
-        }
-        private void RotateSwordToMouse()
-        {
-            var singleStep = 500 * Time.deltaTime;
-            var targetRotation = Quaternion.Euler(0f, 0f, _angleToMouse);
-            _transform.rotation = Quaternion.RotateTowards(_transform.rotation, targetRotation, singleStep);
-        }
-
-        private void AttackRotation(Quaternion fromRotation, Quaternion toRotation)
-        {
-            var singleStep = 200 * Time.deltaTime;
-            _transform.rotation = Quaternion.RotateTowards(fromRotation, toRotation, singleStep);
-        }
+        } 
     }
 }

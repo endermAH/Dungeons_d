@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-
+using Lang = Languages.Languages;
 namespace WeaponControl
+
 {
     public readonly struct WeaponStats
     {
@@ -21,8 +22,8 @@ namespace WeaponControl
         public WeaponStats Stats { get; }
 
         public static Weapon RegularSword = new Weapon(
-            new Vector3(0,4,-2), 
-            new WeaponStats(0.5f, 100f, "Regular sword"));
+            new Vector3(-4,6,-2), 
+            new WeaponStats(0.5f, 100f, Lang.RegularSword.Name.ToString()));
         
         public static Weapon[] All = {RegularSword};
 
