@@ -1,8 +1,12 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using WeaponControl;
 
 namespace Enemy
 {
+    [Serializable] public class GetDamageEvent : UnityEvent<GameObject> { } 
     public struct EnemyStats
     {
         public int Damage;
@@ -16,17 +20,35 @@ namespace Enemy
     }
     public abstract class Enemy : MonoBehaviour
     {
-        [SerializeField] public EnemyStats Stats;
+        [SerializeField] public GetDamageEvent getDamageEvent;
+        public Slider healthSlider;
+        public EnemyStats Stats;
         public int currentHealth;
-        private void Start()
-        {
-            currentHealth = Stats.MaxHealth;
-        }
-
+            
         private void OnTriggerEnter2D(Collider2D other)
         {
-            print("Enemy Damaged");
+            if (other.gameObject.TryGetComponent(out WeaponAttackController weaponAttackController))
+                getDamageEvent.Invoke(other.gameObject);
+        }
+
+        public void OnGetDamage(GameObject damageDealer)
+        {
+            damageDealer.TryGetComponent(out WeaponAttackController weaponAttackController);
+            damageDealer.TryGetComponent(out WeaponAnimationController animationController);
+            currentHealth -= Mathf.RoundToInt(weaponAttackController.currentWeapon.Stats.Damage);
+            // print($"Enemy Damaged: \nCurrent Health: {currentHealth}\nDamage: {damage}");
+            if (currentHealth <= 0) Death();
+        }
+
+        private void Death()
+        {
+            Destroy(gameObject);
+        }
+
+        public void UpdateHealthSlider()
+        {
+            healthSlider.value = (float) currentHealth / Stats.MaxHealth;
         }
     }
-    
+
 }

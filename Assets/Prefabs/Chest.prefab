@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4afc948583b43de92542645d4fb185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1795467865601746843, guid: fb9cda7aff6d643bb98ad8f6b17200fa, type: 3}
   highlighter: {fileID: 0}
   openDistance: 0.24
 --- !u!114 &8701908130187425722

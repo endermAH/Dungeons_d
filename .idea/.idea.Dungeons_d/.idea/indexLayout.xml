@@ -24,6 +24,7 @@
       <Path>.git</Path>
       <Path>.idea</Path>
       <Path>Build1.app</Path>
+      <Path>Build2.app</Path>
       <Path>Library</Path>
       <Path>Logs</Path>
       <Path>Temp</Path>

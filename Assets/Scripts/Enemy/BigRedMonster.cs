@@ -7,6 +7,8 @@ namespace Enemy
         private void Start()
         {
             Stats = new EnemyStats(10,1000);
+            currentHealth = Stats.MaxHealth;
+            UpdateHealthSlider();
         }
 
         // Update is called once per frame

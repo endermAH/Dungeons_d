@@ -67,12 +67,14 @@
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Languages\Languages.cs" />
      <Compile Include="Assets\Scripts\Languages\TranslatableString.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
      <Compile Include="Assets\Scripts\Player\Health.cs" />
      <Compile Include="Assets\Scripts\Player\Movement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\WeaponControl\Weapon.cs" />
      <Compile Include="Assets\Scripts\WeaponControl\WeaponAnimationController.cs" />
      <Compile Include="Assets\Scripts\WeaponControl\WeaponAttackController.cs" />
+     <Compile Include="Assets\SineMovement.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/evg.kur/Dungeons_d/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

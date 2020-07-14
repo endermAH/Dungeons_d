@@ -15,7 +15,7 @@ namespace WeaponControl
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (!onCooldown) attackEvent.Invoke();//StartCoroutine(AnimateWeapon());
+                if (!onCooldown) attackEvent.Invoke();
             }
         }
 
