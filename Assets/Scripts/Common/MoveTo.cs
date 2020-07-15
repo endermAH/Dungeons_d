@@ -5,17 +5,18 @@ namespace Common
 {
     public class MoveTo : MonoBehaviour
     {
-        public void MoveToPoint(Vector3 target, float duration)
+        public IEnumerator MoveToPoint(Vector3 target, float duration)
         {
             var currentPosition = transform.position;
-            StartCoroutine(MoveFromTo(currentPosition, target, duration));
+            yield return StartCoroutine(MoveFromTo(currentPosition, target, duration));
         }
 
-        public void MoveToGameObject(GameObject target, float duration)
+        public IEnumerator MoveToGameObject(GameObject target, float duration)
         {
             var currentPosition = transform.position;
-            var targetPosition = target.transform.position;
-            StartCoroutine(MoveFromTo(currentPosition, targetPosition, duration));
+            var targetTransform = target.transform.position;
+            var targetPosition = new Vector3(targetTransform.x, targetTransform.y, currentPosition.z);
+            yield return StartCoroutine(MoveFromTo(currentPosition, targetPosition, duration));
         }
 
         private IEnumerator MoveFromTo(Vector3 from, Vector3 to, float duration)
