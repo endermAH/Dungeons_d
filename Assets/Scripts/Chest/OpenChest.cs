@@ -30,11 +30,6 @@ public class OpenChest : MonoBehaviour
         _distanceToChest = GetDistanceToChest();
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        print("Collision");
-    }
-
     private static double GetDistance(float x1,float y1, float x2, float y2)
     {
         var deltaX = x1 - x2;;

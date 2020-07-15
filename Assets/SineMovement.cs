@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,18 +7,27 @@ public class SineMovement : MonoBehaviour
 {
     public float deltaY;
     public float amplitude;
+    public bool activeOnStart;
+    private bool _isMoving;
 
     private Vector3 _startPosition;
+
     private void Start()
     {
-        _startPosition = transform.position;
-        StartMovement();
+        if (activeOnStart) StartMovement();
     }
 
-    private void StartMovement()
+    public void StartMovement()
     {
+        _isMoving = true;
+        _startPosition = transform.position;
         var end = new Vector3(_startPosition.x, _startPosition.y+deltaY, _startPosition.z);
         StartCoroutine(MoveFromTo(_startPosition, end, amplitude));
+    }
+
+    public void StopMovement()
+    {
+        _isMoving = false;
     }
     private IEnumerator MoveFromTo(Vector3 startPoint, Vector3 endPoint, float duration)
     {
@@ -25,16 +35,18 @@ public class SineMovement : MonoBehaviour
 
         while (timeElapsed < duration)
         {
-            transform.position = Vector3.Lerp(startPoint, endPoint, timeElapsed / duration);
+            if (_isMoving) transform.position = Vector3.Lerp(startPoint, endPoint, timeElapsed / duration);
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        transform.position = endPoint;
-        
-        deltaY *= -1;
-        var end = new Vector3(_startPosition.x, _startPosition.y+deltaY, _startPosition.z);
-        StartCoroutine(MoveFromTo(endPoint, end, amplitude));
+        if (_isMoving)
+        {
+            transform.position = endPoint;
+            deltaY *= -1;
+            var end = new Vector3(_startPosition.x, _startPosition.y + deltaY, _startPosition.z);
+            StartCoroutine(MoveFromTo(endPoint, end, amplitude));
+        }
     }
 }

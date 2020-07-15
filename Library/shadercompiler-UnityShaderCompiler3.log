@@ -1,2 +1,5 @@
 Base path: '/Volumes/Samsung_T5/Unity 3D/2019.3.15f1/Unity.app/Contents', plugins path '/Volumes/Samsung_T5/Unity 3D/2019.3.15f1/PlaybackEngines'
 Cmd: initializeCompiler
+Unhandled exception: Protocol error - unexpected end of data (did the Editor crash?)
+
+Quitting shader compiler process
