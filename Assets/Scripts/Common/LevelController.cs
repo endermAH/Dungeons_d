@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -10,6 +11,7 @@ namespace Common
         [SerializeField] private Camera levelCamera;
         [SerializeField] private float cameraAnimationDuration;
         [SerializeField] private GameObject playerPanel;
+        [SerializeField] private string nextLevel;
         
         private MoveTo _levelCameraMover;
         private MoveTo _playerPanelMover;
@@ -41,10 +43,10 @@ namespace Common
         {
             _playerMovement.enabled = false;
         }
-        
-        void Update()
+
+        public void GoToNextLevel()
         {
-        
+            SceneManager.LoadScene($"Scenes/{ nextLevel }", LoadSceneMode.Single);
         }
     }
 }
