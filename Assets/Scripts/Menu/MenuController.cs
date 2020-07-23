@@ -56,7 +56,7 @@ namespace Menu
         private void OnMovementEnd()
         {
             if (!_gameStarted) _sine.StartMovement();
-            else SceneManager.LoadScene("Scenes/SampleScene", LoadSceneMode.Single);
+            else SceneManager.LoadScene("Scenes/level1", LoadSceneMode.Single);
         }
     }
 }
