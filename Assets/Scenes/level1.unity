@@ -669,7 +669,7 @@ Transform:
   - {fileID: 602681881}
   - {fileID: 1048622453}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &350904732
 GameObject:
@@ -3714,7 +3714,7 @@ GameObject:
   - component: {fileID: 938570426}
   m_Layer: 0
   m_Name: LevelController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3735,6 +3735,7 @@ MonoBehaviour:
   levelCamera: {fileID: 1897160302}
   cameraAnimationDuration: 3
   playerPanel: {fileID: 181358817}
+  nextLevel: level2
 --- !u!4 &938570427
 Transform:
   m_ObjectHideFlags: 0
@@ -3747,7 +3748,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &940718422
 GameObject:
@@ -7066,7 +7067,7 @@ PrefabInstance:
     - target: {fileID: 1795467865601746820, guid: fb9cda7aff6d643bb98ad8f6b17200fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1795467865601746820, guid: fb9cda7aff6d643bb98ad8f6b17200fa,
         type: 3}
@@ -7241,7 +7242,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1947906549
 GameObject:
