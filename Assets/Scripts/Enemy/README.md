@@ -8,8 +8,8 @@ Parent class for enemies
 | :---              | :---          | :---      | :---                      | :---              | 
 | OnTriggerEnter2D  | private       | Collider2D other - Collider of the object that was collided with      | Switches the enemy's attention to the player   | -    |
 | OnGetDamage       | public        | GameObject damageDealer - Source of damage | Gets damage from some source  | -    |
-| Death             | private       | -         | Destroy enemy's model                  | -    |                 
-| UpdateHealthSlider| public        | -         | Makes health slider smaller            | -    |
+| Death             | private       | -         | Destroy enemy's object                 | -    |                 
+| UpdateHealthSlider| public        | -         | Refresh health bar                     | -    |
 
 ## BigRedMonster.cs
 Red Monster's attributes and behavior

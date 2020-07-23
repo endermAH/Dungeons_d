@@ -5,14 +5,14 @@ Weapon stats and description
 ### Struct `WeaponStats`
 Fields: Name - name of weapon; Damage - damage parameter; AttackCooldown - weapon's cooldown parameter
 
-| Method            | Availability  | Params    | Description               | Return value      |
+| Constructor       | Availability  | Params    | Description               | Return value      |
 | :---              | :---          | :---      | :---                      | :---              | 
 | WeaponStats       | public        | <ui><li>float `attackCooldown`</li><li>float `damage`</li><li>string `name`</li></ui>| Gets weapon name, damage and cooldown | -              |
 
 ### Struct `Weapon`
 Fields: WeaponStats - name, damage and cooldown; Vector3 HandPosition - weapon's size in hand; Weapon[] All - array of weapon
 
-| Method            | Availability  | Params    | Description               | Return value      |
+| Constructor       | Availability  | Params    | Description               | Return value      |
 | :---              | :---          | :---      | :---                      | :---              | 
 | Weapon            | private       | <ui><li>HandPosition `handPosition`</li><li>WeaponStats `stats`</li></ui>| Gets weapon stats and size in hands | -              |
 
@@ -25,16 +25,16 @@ Animation controller script
 | :---              | :---          | :---      | :---                      | :---              | 
 | Start             | private       | -         | Initialize weapon params  | -                 | 
 | Update            | private       | -         | Unity base Update method  | -                 | 
-| KeepPosition      | private       | -         | Animation parameters      | -                 | 
-| OnAttack          | public        | -         | Plays attack animation    | -                 | 
+| KeepPosition      | private       | -         | Attaches the weapon model to the player's model  | -                 | 
+| OnAttack          | public        | -         | Plays attack animation when the player attacks   | -                 | 
 
 ## WeaponAttackController.cs
 Attack controller script
 
-### Class `WeaponAnimationController`
+### Class `WeaponAttackController`
 
 | Method            | Availability  | Params    | Description               | Return value      |
 | :---              | :---          | :---      | :---                      | :---              | 
 | Update            | private       | -         | Attack button controller  | -                 | 
 | StartAttack       | public        | -         | Do attack                 | -                 | 
-| Attack            | private       | -         | Animation cooldown        | -                 |
+| Attack            | private       | -         | Attack cooldown           | -                 |
