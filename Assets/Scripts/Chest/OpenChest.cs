@@ -4,7 +4,7 @@ using Random = System.Random;
 public class OpenChest : MonoBehaviour
 {
     public GameObject player;
-    public GameObject highlighter;
+    public GameObject Highlighter;
     private GameObject _thisHighlighter;
     private Transform _chestTransform;
     private Animator _chestAnimator;
@@ -87,7 +87,7 @@ public class OpenChest : MonoBehaviour
             var chestX = position.x;
             var chestY = position.y;
             if (!_thisHighlighter)
-                _thisHighlighter = Instantiate(highlighter, new Vector3(chestX,chestY, 0), Quaternion.identity);
+                _thisHighlighter = Instantiate(Highlighter, new Vector3(chestX,chestY, 0), Quaternion.identity);
         }
         else
         {
