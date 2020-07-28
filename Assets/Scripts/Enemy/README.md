@@ -2,11 +2,19 @@
 ## Enemy.cs
 Parent class for enemies
 
+### Struct `EnemyStats`
+Fields: int Damage, int MaxHealth
+
+| Constructor       | Availability  | Params    | Description               | Return value      |
+| :---              | :---          | :---      | :---                      | :---              | 
+| EnemyStats        | public        | <ui><li>int `Damage`</li><li>int `MaxHeahth`</li></ui>| Initialized enemy's damage and max health | -    |
+
+
 ### Abstract class `Enemy`
 
 | Method            | Availability  | Params    | Description               | Return value      |
 | :---              | :---          | :---      | :---                      | :---              | 
-| OnTriggerEnter2D  | private       | Collider2D other - Collider of the object that was collided with      | Switches the enemy's attention to the player   | -    |
+| OnTriggerEnter2D  | private       | Collider2D other - Collider of the object that was collided with | Calls 'get damage event' if enemy model collides with weapon   | -    |
 | OnGetDamage       | public        | GameObject damageDealer - Source of damage | Gets damage from some source  | -    |
 | Death             | private       | -         | Destroy enemy's object                 | -    |                 
 | UpdateHealthSlider| public        | -         | Refresh health bar                     | -    |

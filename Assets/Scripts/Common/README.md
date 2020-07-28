@@ -30,6 +30,7 @@ Rotates the player model, depending on the position of the cursor
 ## ZSortController.cs
 
 ### Class `ZSortController`
+Defines the behaviour of displaying objects in front of other
 
 | Method            | Availability  | Params    | Description               | Return value      |
 | :---              | :---          | :---      | :---                      | :---              | 
