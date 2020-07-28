@@ -84,16 +84,14 @@ public class OpenChest : MonoBehaviour
         if (_distanceToChest < openDistance)
         {
             var position = _chestTransform.position;
-            var chestX = position.x;
-            var chestY = position.y;
+			var vector = new Vector3(position.x, position.y, 0);
             if (!_thisHighlighter)
-                _thisHighlighter = Instantiate(Highlighter, new Vector3(chestX,chestY, 0), Quaternion.identity);
+                _thisHighlighter = Instantiate(Highlighter, vector, Quaternion.identity);
         }
         else
         {
             if (_thisHighlighter)
                 Destroy(_thisHighlighter);
         }
-
     }
 }
