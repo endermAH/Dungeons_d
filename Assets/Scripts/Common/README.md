@@ -9,14 +9,14 @@ Cursor controller script
 | Start             | private       | -         | Set cursor                | -                 |
 
 ## FlipController.cs
-Rotates the player model, depending on the position of the cursor
+Mirrors the player model, depending on the position of the cursor
 
 ### Class `FlipController`
 
 | Method            | Availability  | Params    | Description               | Return value      |
 | :---              | :---          | :---      | :---                      | :---              | 
 | Start             | private       | -         | Unity base Start method   | -                 |
-| Update            | private       | -         | checks the cursor position relative to the player model  | -                 |
+| Update            | private       | -         | Checks the cursor position relative to the player model  | -                 |
 
 ## PlayerArrowController.cs
 

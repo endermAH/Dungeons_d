@@ -10,7 +10,7 @@ Player's health controller script
 | Damage            | public        | int count - count of damage | Reduce player's health  | -    |
 | Death             | public        | -         | Processing the "player died" event        | -    |                 
 | Start             | private       | -         | Initialize player's health                | -    |                 
-| UpdateHealthBar   | private       | -         | Makes health bar value smaller or bigger        | -    |
+| UpdateHealthBar   | private       | -         | Update health bar value                   | -    |
 
 ## Movement.cs
 Move controller script
