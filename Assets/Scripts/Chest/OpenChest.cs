@@ -64,7 +64,7 @@ public class OpenChest : MonoBehaviour
 
     private void CheckOpen()
     {
-        if (!Input.GetKeyUp(KeyCode.Return)) return;
+        if (!Input.GetKeyUp(KeyCode.E)) return;
         if (!(_distanceToChest < openDistance)) return;
         
         _chestAnimator.SetBool(Open, true);
@@ -84,9 +84,9 @@ public class OpenChest : MonoBehaviour
         if (_distanceToChest < openDistance)
         {
             var position = _chestTransform.position;
-            var vector = new Vector3(position.x, position.y, 0);
+            var highlighterSpawnPosition = new Vector3(position.x, position.y, 0);
             if (!_thisHighlighter)
-                _thisHighlighter = Instantiate(Highlighter, vector, Quaternion.identity);
+                _thisHighlighter = Instantiate(Highlighter, highlighterSpawnPosition, Quaternion.identity);
         }
         else
         {
