@@ -7,7 +7,7 @@ using static Common.LineOfSight;
 
 namespace Enemy
 {
-    public class SimpleEnemyAi : MonoBehaviour
+    public class SimpleEnemyAI : MonoBehaviour
     {
         private LineOfSight _lineOfSight;
         private Rigidbody2D _rigidbody2D;
@@ -29,17 +29,17 @@ namespace Enemy
             if (player)
             {
                 var direction = player.transform.position - transform.position;
-                if (!_animator.GetBool(Hit)) _rigidbody2D.velocity = direction.normalized * 2; //TODO remove magic number
+                if (!_animator.GetBool(Hit)) _rigidbody2D.velocity = direction.normalized * 2;
             }
             else
             {
                 _rigidbody2D.velocity = Vector2.zero;
             }
-
+        
             var speed = Mathf.Abs(_rigidbody2D.velocity.x) + Mathf.Abs(_rigidbody2D.velocity.y);
             _animator.SetFloat(Speed, speed);
         }
-
+        
         private GameObject GetNearestPlayer()
         {
             var minDistance = Mathf.Infinity;
@@ -53,10 +53,10 @@ namespace Enemy
                     nearestPlayer = player;
                 }
             }
-
+        
             return nearestPlayer;
         }
-
+        
         private void OnCollisionStay2D(Collision2D other)
         {
             if (other.gameObject.CompareTag("Player"))
@@ -68,12 +68,12 @@ namespace Enemy
                 }
             }
         }
-
+        
         private IEnumerator HitPlayer(GameObject player)
         {
-            player.GetComponent<Health>().Damage(20); //TODO remove magic number
+            player.GetComponent<Health>().Damage(20); 
             _animator.SetBool(Hit, true);
-            yield return new WaitForSeconds(0.3f); //TODO remove magic number
+            yield return new WaitForSeconds(0.3f); 
             _animator.SetBool(Hit, false);
         }
     }
