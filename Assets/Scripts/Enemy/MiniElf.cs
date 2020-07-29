@@ -2,13 +2,13 @@
 
 namespace Enemy
 {
-    public class BigRedMonster : Enemy
+    public class MiniElf : Enemy
     {
         private void Start()
         {
             Stats = new EnemyStats(
-                damage: 10,
-                maxHealth: 1000,
+                damage: 10, 
+                maxHealth: 100,
                 speedFactor: 33
                 );
             currentHealth = Stats.MaxHealth;
