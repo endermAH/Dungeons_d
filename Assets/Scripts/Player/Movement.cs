@@ -29,7 +29,6 @@ namespace Player
         _horizontal *= MoveLimiter;
         _vertical *= MoveLimiter;
       }
-      AnimationFixedUpdate();
       _body.velocity = new Vector2(_horizontal , _vertical);
     }
 
@@ -37,9 +36,6 @@ namespace Player
     {
       _animator.SetFloat(Speed, Mathf.Abs(_horizontal) + Mathf.Abs(_vertical));
     }
-
-    private void AnimationFixedUpdate() {
-      _animator.SetFloat(Speed, Mathf.Abs(_horizontal*_vertical));
-    }
+    
   }
 }

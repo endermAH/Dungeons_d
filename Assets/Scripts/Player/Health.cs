@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Player
@@ -20,6 +21,7 @@ namespace Player
         public void Damage(int count)
         {
             _currentHealth = Mathf.Clamp(_currentHealth - count, 0, _maxHealth);
+            UpdateHealthBar();
             if (_currentHealth <= 0)
             {
                 this.Death();
@@ -28,7 +30,9 @@ namespace Player
 
         public void Death()
         {
+            // Destroy(gameObject);
             print("Death");
+            SceneManager.LoadScene("Scenes/level1", LoadSceneMode.Single);
         }
 
         private void Start()
