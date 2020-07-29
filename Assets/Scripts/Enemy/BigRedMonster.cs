@@ -6,7 +6,11 @@ namespace Enemy
     {
         private void Start()
         {
-            Stats = new EnemyStats(10,1000);
+            Stats = new EnemyStats(
+                damage: 10,
+                maxHealth: 1000,
+                speedFactor: 33
+                );
             currentHealth = Stats.MaxHealth;
             UpdateHealthSlider();
         }

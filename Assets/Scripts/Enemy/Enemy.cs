@@ -1,4 +1,5 @@
 ﻿using System;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,11 +12,13 @@ namespace Enemy
     {
         public int Damage;
         public int MaxHealth;
+        public int SpeedFactor;
 
-        public EnemyStats(int damage, int maxHealth)
+        public EnemyStats(int damage, int maxHealth, int speedFactor)
         {
             Damage = damage;
             MaxHealth = maxHealth;
+            SpeedFactor = speedFactor;
         }
     }
     public abstract class Enemy : MonoBehaviour
@@ -42,6 +45,12 @@ namespace Enemy
 
         private void Death()
         {
+            var players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in players)
+            {
+                var playerStats = player.GetComponent<PlayerStats>();
+                playerStats.AddExp(30);
+            }
             Destroy(gameObject);
         }
 

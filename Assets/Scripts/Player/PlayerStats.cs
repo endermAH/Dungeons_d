@@ -32,7 +32,7 @@ namespace Player
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.Return))
             {
                 AddExp(10);
             }
