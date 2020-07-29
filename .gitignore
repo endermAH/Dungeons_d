@@ -65,3 +65,7 @@ crashlytics-build.properties
 
 # Mac os Finder files
 .DS_Store
+
+*vsc.xml
+*manifest.json
+*ProjectVersion.txt

@@ -4,7 +4,7 @@ using Random = System.Random;
 public class OpenChest : MonoBehaviour
 {
     public GameObject player;
-    public GameObject highlighter;
+    public GameObject Highlighter;
     private GameObject _thisHighlighter;
     private Transform _chestTransform;
     private Animator _chestAnimator;
@@ -64,7 +64,7 @@ public class OpenChest : MonoBehaviour
 
     private void CheckOpen()
     {
-        if (!Input.GetKeyUp(KeyCode.Return)) return;
+        if (!Input.GetKeyUp(KeyCode.E)) return;
         if (!(_distanceToChest < openDistance)) return;
         
         _chestAnimator.SetBool(Open, true);
@@ -84,10 +84,9 @@ public class OpenChest : MonoBehaviour
         if (_distanceToChest < openDistance)
         {
             var position = _chestTransform.position;
-            var chestX = position.x;
-            var chestY = position.y;
+            var highlighterSpawnPosition = new Vector3(position.x, position.y, 0);
             if (!_thisHighlighter)
-                _thisHighlighter = Instantiate(highlighter, new Vector3(chestX,chestY, 0), Quaternion.identity);
+                _thisHighlighter = Instantiate(Highlighter, highlighterSpawnPosition, Quaternion.identity);
         }
         else
         {
