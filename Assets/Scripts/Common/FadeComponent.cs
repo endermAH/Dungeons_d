@@ -12,62 +12,65 @@ public class FadeComponent : MonoBehaviour
     public float FadeOutTime;
     public float WaitTime;
     public bool DestroyOnFinish;
+    private bool Invisible;
     
     private void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         color = sprite.material.color;
         _existTime = 0.0f;
+        Invisible = false;
     }
     
-    private void Update()
+    private void FixedUpdate()
     {
-        float FadeOutStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2));
-        float FadeInStartCondition = Mathf.Abs(FadeOutStartCondition - (FadeOutTime + WaitTime));
-        if (StartFade)
-        {
-            if (FadeOutStartCondition <= 0.05f)
-            {
-                StartCoroutine(StartFadeOut());
-            }
-            if (!DestroyOnFinish)
-            {
-                if (FadeInStartCondition <= 0.05f)
-                {
-                    StartCoroutine(StartFadeIn());
-                }
-            }
-            //else destroy object
-        }
+        if (StartFade) 
+            StartCoroutine(StartFadeOut());
+        if (!DestroyOnFinish)
+            StartCoroutine(StartFadeIn());
         _existTime += Time.deltaTime;
     }
 
     private IEnumerator StartFadeIn()
     {
+        float FadeInStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2 - (FadeOutTime + WaitTime)));
         float timestart = 0.0f;
-        while (timestart < FadeInTime)
+        if (FadeInStartCondition <= Time.deltaTime && Invisible)
         {
-            color.a = timestart / FadeInTime;
-			sprite.material.color = color;
-            timestart += Time.deltaTime;
-            yield return null;
+            while (timestart < FadeInTime)
+            {
+                color.a = timestart / FadeInTime;
+                sprite.material.color = color;
+                timestart += Time.deltaTime; 
+                yield return null;
+            } 
+            color.a = 1.0f;
+            Invisible = false;
         }
-        color.a = 1.0f;
+        else yield break;
     }
 
     private IEnumerator StartFadeOut()
     {
+        float FadeOutStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2));
         float timestart = FadeOutTime;
-        while (timestart > 0.0f)
         {
-            color.a = timestart / FadeOutTime;
-            sprite.material.color = color;
-            timestart -= Time.deltaTime;
-            yield return null;
+            if (FadeOutStartCondition <= Time.deltaTime && !Invisible) 
+            {
+                while (timestart > 0.0f)
+                {
+                    color.a = timestart / FadeOutTime;
+                    sprite.material.color = color;
+                    timestart -= Time.deltaTime;
+                    yield return null;
+                } 
+                color.a = 0.0f;
+                Invisible = true;
+            }
+            else yield break;
         }
-        color.a = 0.0f;
     }
-    
+
     public void SetFadeStarter(bool IsFadeStart)
     {
         StartFade = IsFadeStart;
