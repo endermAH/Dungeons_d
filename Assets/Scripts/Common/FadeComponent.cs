@@ -11,7 +11,7 @@ public class FadeComponent : MonoBehaviour
     public float FadeInTime;
     public float FadeOutTime;
     public float WaitTime;
-    public bool DestroyOnFinish;
+    public bool IsContinueFade;
     private bool Invisible;
     public bool IsInvisibleOnStart;
     
@@ -20,27 +20,41 @@ public class FadeComponent : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         color = sprite.material.color;
         _existTime = 0.0f;
-        Invisible = false;
-        if (IsInvisibleOnStart) color.a = 0.0f;
-        sprite.material.color = color;
+        if (IsInvisibleOnStart)
+        {
+            Invisible = true;
+            color.a = 0.0f;
+            sprite.material.color = color;
+        }
+        else 
+            Invisible = false;
     }
     
     private void FixedUpdate()
     {
         if (StartFade)
         {
-            if (IsInvisibleOnStart)
+            if (!IsInvisibleOnStart)
+            {
                 StartCoroutine(StartFadeOut());
-            else StartCoroutine(StartFadeIn);
-            if (!DestroyOnFinish)
+                if (IsContinueFade)
+                    StartCoroutine(StartFadeIn());
+            }
+            else
+            {
                 StartCoroutine(StartFadeIn());
+                if (IsContinueFade)
+                    StartCoroutine(StartFadeOut());
+            }
         }
         _existTime += Time.deltaTime;
     }
 
     private IEnumerator StartFadeIn()
     {
-        float FadeInStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2 - (FadeOutTime + WaitTime)));
+        float FadeInStartCondition;
+        if (IsInvisibleOnStart) FadeInStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2));
+        else FadeInStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2 - (FadeOutTime + WaitTime)));
         float timestart = 0.0f;
         if (FadeInStartCondition <= Time.deltaTime && Invisible)
         {
@@ -59,7 +73,11 @@ public class FadeComponent : MonoBehaviour
 
     private IEnumerator StartFadeOut()
     {
-        float FadeOutStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2));
+        float FadeOutStartCondition;
+        if (IsInvisibleOnStart) 
+            FadeOutStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2 - (FadeOutTime + WaitTime)));
+        else
+            FadeOutStartCondition = Mathf.Abs(_existTime % (FadeOutTime + FadeInTime + WaitTime * 2));
         float timestart = FadeOutTime;
         {
             if (FadeOutStartCondition <= Time.deltaTime && !Invisible) 
@@ -83,9 +101,9 @@ public class FadeComponent : MonoBehaviour
         StartFade = IsFadeStart;
     }
     
-    public void SetDestroyer(bool IsDestroy)
+    public void SetContinuer(bool IsContinue)
     {
-        DestroyOnFinish = IsDestroy;
+        IsContinueFade = IsContinue;
     }
 
     public void SetFadeInTime(float FadeInDuration)
