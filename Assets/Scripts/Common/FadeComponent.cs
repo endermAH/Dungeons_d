@@ -13,6 +13,7 @@ public class FadeComponent : MonoBehaviour
     public float WaitTime;
     public bool DestroyOnFinish;
     private bool Invisible;
+    public bool IsInvisibleOnStart;
     
     private void Start()
     {
@@ -20,14 +21,20 @@ public class FadeComponent : MonoBehaviour
         color = sprite.material.color;
         _existTime = 0.0f;
         Invisible = false;
+        if (IsInvisibleOnStart) color.a = 0.0f;
+        sprite.material.color = color;
     }
     
     private void FixedUpdate()
     {
-        if (StartFade) 
-            StartCoroutine(StartFadeOut());
-        if (!DestroyOnFinish)
-            StartCoroutine(StartFadeIn());
+        if (StartFade)
+        {
+            if (IsInvisibleOnStart)
+                StartCoroutine(StartFadeOut());
+            else StartCoroutine(StartFadeIn);
+            if (!DestroyOnFinish)
+                StartCoroutine(StartFadeIn());
+        }
         _existTime += Time.deltaTime;
     }
 
